@@ -51,6 +51,7 @@
            03 WS-SUPPLIER-NO        PIC 9(8)  COMP-4  VALUE ZERO.
            03 LINK-RESP             PIC 9(8)  COMP    VALUE ZERO.
            03 LINK-RESP2            PIC 9(8)  COMP    VALUE ZERO.
+           03 Message-Variable PIC X(50).
 
       *    Message to display for normal completion.
       *    Display Supplier ID and name.
@@ -81,6 +82,10 @@
        PROCEDURE DIVISION USING DFHEIBLK.
       *
        MAIN-PROCESSING SECTION.
+       
+            MOVE "Hello, World!" TO Message-Variable.
+            DISPLAY "This is a simple COBOL program.".
+            DISPLAY "The message is: " Message-Variable.
 
       *    Receive data from terminal
            MOVE LENGTH OF WS-TERMINAL-INPUT TO WS-RECEIVE-LENGTH.
@@ -162,7 +167,7 @@
            EXEC CICS SEND TEXT FROM(RESPONSE-MESSAGE)
                      ERASE FREEKB END-EXEC.
       *
-           DISPLAY "cobol PGM ".
+      *     DISPLAY "cobol PGM ".
       *    Return control to CICS (end transaction).
            EXEC CICS RETURN END-EXEC.
       *
